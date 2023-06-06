@@ -9,8 +9,20 @@
       />
     </div>
   </div>
+  <div class="mt-2 d-flex flex-column"></div>
+  <button
+    class="btn btn-primary mx-3"
+    @click="$router.push({ name: 'entries', params: { id: 'new' } })"
+  >
+    <i class="fa fa-plus-circle"></i>
+    Nueva entreda
+  </button>
   <div class="entry-scrollarea">
-    <Entry v-for="entry in entriesByTemr" :key="entry.id" :entry="entry"></Entry>
+    <Entry
+      v-for="entry in entriesByTemr"
+      :key="entry.id"
+      :entry="entry"
+    ></Entry>
   </div>
 </template>
 
@@ -41,7 +53,7 @@ export default {
   // height: calc( 100vh - 960px);
 }
 .entry-scrollarea {
-  height: calc(100vh - 104px);
+  height: calc(100vh - 150px);
   overflow: scroll;
 }
 </style>
