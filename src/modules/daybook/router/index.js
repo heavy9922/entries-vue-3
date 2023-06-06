@@ -15,11 +15,12 @@ export default {
     },
     {
       path: ':id',
-      name: 'entry',
+      name: 'entries',
       component: () =>
         import(
           /* webpackChunkName: "entry" */ '@/modules/daybook/views/Entryview.vue'
         ),
+      props: (route) => ({ id: route.params.id }),
     },
   ],
 }
