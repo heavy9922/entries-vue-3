@@ -7,12 +7,31 @@
         height="25"
         class="d-inline-block align-text-top mx-2"
       />
-      Daybook
+      {{ username.toUpperCase() }}
     </a>
     <div class="d-flex">
       <button class="btn btn-outline-info mx-2">
-        <i class="fa fa-sign-out-alt"></i>
+        <i class="fa fa-sign-out-alt" @click="onLogout"></i>
       </button>
     </div>
   </nav>
 </template>
+
+<script>
+import useAuth from "@/modules/auth/composables/useauth";
+import { useRouter } from "vue-router";
+
+export default {
+  setup() {
+    const router = useRouter();
+    const { username, logoutUser } = useAuth();
+    return {
+      username,
+      onLogout: () => {
+        router.push({ name: "login" });
+        logoutUser();
+      },
+    };
+  },
+};
+</script>
