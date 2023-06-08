@@ -1,28 +1,36 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 
+import authRouter from '../modules/auth/router'
 import dayBookRouter from '../modules/daybook/router'
+import isAuthGuard from '@/modules/auth/router/auth-guard'
 
 const routes = [
   {
     path: '/',
     name: 'home',
-    component: HomeView
+    component: HomeView,
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import(/* webpackChunkName: "about" */ '../views/AboutView.vue')
+    component: () =>
+      import(/* webpackChunkName: "about" */ '../views/AboutView.vue'),
+  },
+  {
+    path: '/auth',
+    ...authRouter,
   },
   {
     path: '/daybook',
+    beforeEnter: [isAuthGuard],
     ...dayBookRouter,
   },
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
-  routes
+  routes,
 })
 
 export default router
